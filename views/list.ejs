@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>To Do List</title>
+</head>
+<body>
+
+    <h1> <%= kindOfDay %> </h1>
+    <div class="container">
+        <ul>
+            <% for (var i=0; i<newListItems.length; i++) { %>
+            <li><button type="submit" name="delItem" class="btn-delete">-</button></a> <%= newListItems[i] %> </li>
+            <% } %>
+        </ul>
+    
+        <form action="/" class="" method="post">
+            <input type="text" name="newItem" id="" class="input" autocomplete="off">
+            <button type="submit" name="button" class="btn-success">+</button>
+        </form>
+    </div>
+    
+</body>
+</html>
