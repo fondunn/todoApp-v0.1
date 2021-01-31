@@ -5,6 +5,8 @@ const app = express();
 
 const items = ['Welcome', 'its a to do list', 'delete default from list'];
 
+const workItems = []; 
+
 app.set('view engine', 'ejs'); 
 
 app.use(bodyParser.urlencoded({ extended:true }));
@@ -22,17 +24,28 @@ app.get('/', (req,res) => {
     const day = today.toLocaleDateString('en-US', options);
     
 
-    res.render('list', { kindOfDay: day, newListItems: items });
+    res.render('list', { listTitle : day, newListItems: items });
 
     app.post('/', (req,res) => {
         const item = req.body.newItem;
-        if (item != '') {
-        items.push(item);
-        
-        res.redirect('/');
+
+        if(req.body.list === 'Work'){
+            workItems.push(item);
+            res.redirect('/work');
         } else {
-            console.log('err');
+            items.push(item); 
+            res.redirect('/');
         }
+
+        
+    });
+    app.get('/work', (req,res) => {
+        res.render('list', {listTitle: 'Work List', newListItems: workItems});
+    });
+    app.post('/work', (req,res) => {
+         const item = req.body.newItem;
+         workItems.push(item);
+         res.redirect('/work');
     });
  
 });
